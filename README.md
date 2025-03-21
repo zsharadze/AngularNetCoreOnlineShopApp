@@ -2,8 +2,7 @@
 This is Angular 18 and ASP.Net Core 9 Web Api Domain Driven Design online shop application with shopping cart and admin panel (design is responsive).
 
 ## Features
-Angular 18, NgRx for state management, Bootstrap 5, authentication (token), authorization (roles), shopping cart, placing orders with promo codes, search and pagination, admin panel for managing orders, products, categories and generating promo codes, lazy loading admin panel components, change password functionality, login and register pages. There are 2 default roles: User and Admin. Non admin user can't access admin panel. Admin can add edit products, categories and generate promo codes. App uses toasts to show errors and messages. Products can have multiple images. In appsettings.json maximum image upload file size can be set. Also there's options to set maximum allowed count of uploaded images for product.
-
+Angular 18, NgRx for state management, Bootstrap 5, authentication (token), authorization (roles), shopping cart, placing orders with promo codes, search and pagination, admin panel for managing orders, products, categories and generating promo codes, lazy loading admin panel components, change password functionality, login and register pages. There are 2 default roles: User and Admin. Non admin user can't access admin panel. Admin can add edit products, categories and generate promo codes. App uses toasts to show errors and messages. Products can have multiple images. In appsettings.json maximum image upload file size can be set. Also there's options to set maximum allowed count of uploaded images for product. App has global loader component.
 ## Getting Started
 1. Go to ASPNetCoreWebApi and open ASPNetCoreWebApi.sln in Visual Studio.
 2. In appsettings.json change DefaultConnection string.
