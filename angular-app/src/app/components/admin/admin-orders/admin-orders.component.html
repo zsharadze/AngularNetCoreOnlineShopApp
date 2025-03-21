@@ -1,0 +1,99 @@
+<div class="container-fluid mt-2 mb-3">
+  <table class="table table-striped table-bordered">
+    <thead class="table-dark">
+      <tr>
+        <th># Order ID</th>
+        <th class="details-th">Details</th>
+        <th>Order Date</th>
+        <th>Promo used</th>
+        <th>Subtotal</th>
+        <th>Subtotal with promo</th>
+        <th class="status-th">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let order of (ordersState$ | async)?.orderList; let i = index"
+      >
+        <td>{{ order.id }}</td>
+        <td>
+          <table class="table table-bordered">
+            <thead class="table-info">
+              <tr>
+                <th></th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orderItem of order.orderItems">
+                <td>
+                  <img
+                    class="order-item-img"
+                    *ngIf="orderItem.product.imageName"
+                    src="{{ urlProductImages + orderItem.product.imageName }}"
+                    alt="Product image"
+                    [routerLink]="'/details/' + orderItem.productId"
+                  />
+                </td>
+                <td>
+                  <span class="fw-bold">{{ orderItem.product.name }}</span
+                  ><br />{{ orderItem.product.description }}
+                </td>
+                <td>{{ orderItem.product.price }}</td>
+                <td>{{ orderItem.quantity }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+        <td>{{ order.createdDate | date : "dd-MM-yyyy HH:mm:ss" }}</td>
+
+        <td>{{ !order.promoCode ? "No" : "Yes" }}</td>
+        <td>${{ order.subtotal }}</td>
+        <td>
+          {{ order.subtotalWithPromo || order.subtotalWithPromo == 0 ? "$" + order.subtotalWithPromo : "" }}
+        </td>
+        <td>
+          <div class="text-center" *ngIf="i !== editStatusIndex">
+            <span
+              class="btn btn-edit ms-1"
+              changeBGOnOrderStatus
+              [orderStatus]="order.status"
+              >{{ order.status | orderStatus }}</span
+            >
+            <a
+              class="btn btn-edit ms-1"
+              (click)="editStatus(order.id, i, order.status)"
+              ><i class="fa fa-edit"></i>Edit</a
+            >
+          </div>
+          <div class="text-center" *ngIf="i === editStatusIndex">
+            <select
+              class="form-select d-inline status-select"
+              [(ngModel)]="selectedOrderStatus"
+            >
+              <option
+                *ngFor="let orderStatus of orderStatuses"
+                [value]="orderStatus.value"
+              >
+                {{ orderStatus.key }}
+              </option>
+            </select>
+
+            <a class="btn btn-save ms-1 bg-success" (click)="saveEditedStatus()"
+              ><i class="fa fa-save"></i>Save</a
+            >
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination
+    [pager]="(ordersState$ | async)?.pager"
+    (pageChanged)="pageIndexChanged($event)"
+  ></app-pagination>
+  <span class="fst-italic">{{
+    (ordersState$ | async)?.pager?.paginationSummary
+  }}</span>
+</div>

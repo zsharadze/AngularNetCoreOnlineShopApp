@@ -1,0 +1,21 @@
+<aside class="side-panel">
+  <h3>Categories</h3>
+  <ul>
+    <li
+      *ngFor="let category of (categoriesState$ | async)?.categoryList"
+      (click)="categoryClick(category.id)"
+      role="button"
+    >
+      @if(category.faClass){
+      <i class="{{ category.faClass }} menuIcon"></i>
+      } @else if (category.imageName){
+      <img
+        src="{{ urlCategoryImages + category.imageName }}"
+        class="menuImage"
+        alt="category image"
+      />
+      }
+      <span class="ms-3">{{ category.name }}</span>
+    </li>
+  </ul>
+</aside>

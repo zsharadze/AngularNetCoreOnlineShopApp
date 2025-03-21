@@ -1,0 +1,11 @@
+<div id="customModal" class="modal-overlay" [ngClass]="isShowModal ? 'd-flex':'d-none'">
+    <div class="modal-content">
+      <h5>{{title}}</h5>
+      <p class="message">{{message}}</p>
+      <div class="buttonsWrapper">
+        <button class="{{'btn ' +okButtonClass}}" (click)="okButtonClick()" *ngIf="hasOkButton">OK</button>
+        <button class="{{'btn ' +yesButtonClass}} me-2" (click)="yesButtonClick()" *ngIf="hasYesButton">Yes</button>
+        <button class="{{'btn ' +noButtonClass}}" (click)="noButtonClick()" *ngIf="hasNoButton">No</button>
+      </div>
+    </div>
+  </div>

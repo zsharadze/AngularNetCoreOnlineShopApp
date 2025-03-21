@@ -1,0 +1,101 @@
+<app-header></app-header>
+<i class="fa fa-arrow-circle-left ms-2 mt-1" aria-hidden="true" (click)="location.back()" title="Go back"></i>
+<app-modal-dialog
+  title="Error"
+  message="Applied promo code is invalid."
+></app-modal-dialog>
+<div class="container">
+  <main class="main-content mt-3" *ngIf="(shoppingCart$ | async)?.length! > 0">
+    <div class="order-summary">
+      <h4>Shopping cart items:</h4>
+      <ul class="product-list">
+        <li *ngFor="let shoppingCartItem of shoppingCart$ | async">
+          <img
+            src="{{ urlProductImages + shoppingCartItem.imageName }}"
+            alt="{{ shoppingCartItem.imageName }}"
+          />
+          <div class="product-details">
+            <h3 class="fw-bold">{{ shoppingCartItem.name }}</h3>
+            <p id="description">{{ shoppingCartItem.description }}</p>
+
+            <div class="d-flex align-items-center">
+              <h4 id="productTotalPrice" class="fw-bold mt-2">
+                ${{ shoppingCartItem.totalPrice }}
+              </h4>
+              <label class="ms-3 me-2 ps-3" for="quantity">Quantity:</label>
+              <input
+                type="number"
+                id="quantity"
+                class="form-control w-25"
+                min="1"
+                [value]="shoppingCartItem.quantity"
+                (change)="onQuantityChange($event, shoppingCartItem.productId!)"
+              />
+              <i
+                class="fa fa-trash deleteItemBtn ms-3"
+                aria-hidden="true"
+                (click)="deleteItem(shoppingCartItem.productId!)"
+              ></i>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="product-details">
+      <div *ngIf="!appliedPromoCode" id="withoutPromoWrapper">
+        <label for="quantity" class="me-2">Do you have promo code?:</label>
+        <div class="d-flex align-items-center mb-4">
+          <input
+            #promoCode
+            type="text"
+            class="form-control w-75 me-2"
+            placeholder="Promo Code"
+            [value]="promoCode.value"
+          />
+          <button
+            type="button"
+            class="btn btn-outline-primary w-50"
+            (click)="applyPromoCode(promoCode.value)"
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+      <div *ngIf="appliedPromoCode" id="withPromoWrapper">
+        <button
+          type="button"
+          class="btn btn-warning w-100"
+        >
+          Promo code applied
+        </button>
+      </div>
+      <div class="product-attributes">
+        <ul>
+          <li>
+            <h5 *ngIf="!appliedPromoCode" class="fw-bold">
+              Subtotal: <span class="float-end">${{ getSubTotal(false) }}</span>
+            </h5>
+            <h5 *ngIf="appliedPromoCode" class="fw-bold">
+              <s>Subtotal: </s
+              ><span class="float-end"
+                ><s>${{ getSubTotal(false) }}</s></span
+              >
+            </h5>
+          </li>
+          <li *ngIf="appliedPromoCode">
+            <h5 class="fw-bold">
+              Subtotal with promo:
+              <span class="float-end">${{ getSubTotal(true) }}</span>
+            </h5>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-success w-100" (click)="placeOrder()">Place order</button>
+    </div>
+  </main>
+  <main class="main-content mt-3" *ngIf="(shoppingCart$ | async)?.length === 0">
+    <div class="product-summary-list text-center">
+      <h2 class="text-primary">Shopping cart is empty.</h2>
+    </div>
+  </main>
+</div>

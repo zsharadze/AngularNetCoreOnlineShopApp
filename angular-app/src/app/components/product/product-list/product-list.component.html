@@ -1,0 +1,33 @@
+<app-header  (notifySearchTextChange)="searchTextChanged($event)"></app-header>
+<div id="container" class="container">
+  <app-side-panel
+    (notifyCategoryChange)="categoryChange($event)"
+  ></app-side-panel>
+  <main id="main-content" class="main-content">
+    <div class="product-grid">
+      <div
+        *ngFor="let product of (productsState$ | async)?.productList"
+        class="product"
+        class="product-card"
+      >
+        <img
+          role="button"
+          src="{{ urlProductImages + product.imageName }}"
+          alt="{{ product.name }}"
+          (click)="goToDetails(product.id)"
+        />
+        <h3 role="button" (click)="goToDetails(product.id)">{{ product.name }}</h3>
+        <p class="text-description" role="button" (click)="goToDetails(product.id)">{{ product.description }}</p>
+        <h5 class="text-success">{{ product.price }} $</h5>
+        <button class="add-to-cart-button w-100" (click)="addProductToCart(product)">Add to Cart <i class="fa fa-cart-plus" aria-hidden="true"></i></button>
+      </div>
+    </div>
+    <app-pagination
+      [pager]="(productsState$ | async)?.pager"
+      (pageChanged)="pageIndexChanged($event)"
+    ></app-pagination>
+    <span class="fst-italic">{{
+      (productsState$ | async)?.pager?.paginationSummary
+    }}</span>
+  </main>
+</div>

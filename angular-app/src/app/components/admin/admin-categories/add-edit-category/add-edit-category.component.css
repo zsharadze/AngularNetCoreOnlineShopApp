@@ -1,0 +1,43 @@
+.container {
+  max-width: 407px;
+}
+
+input {
+  width: 290px;
+  display: inline-block;
+}
+
+input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.form-check-label {
+  cursor: pointer;
+}
+
+input[type="radio"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.category-image {
+  width: 130px;
+  height: 130px;
+}
+
+.category-form {
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 15px 40px 15px 40px;
+}
+
+#faClassInput {
+  width: 240px;
+}
+
+#fa-class-icon-preview {
+  font-size: 21px;
+}

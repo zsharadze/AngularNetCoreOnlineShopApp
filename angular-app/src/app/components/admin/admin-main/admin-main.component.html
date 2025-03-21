@@ -1,0 +1,105 @@
+<app-header></app-header>
+<main>
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <button
+        class="nav-link"
+        [ngClass]="activeTab === 'Orders' ? 'active' : ''"
+        id="nav-orders-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-orders"
+        type="button"
+        role="tab"
+        aria-controls="nav-orders"
+        aria-selected="true"
+        (click)="changeTab('Orders')"
+      >
+        Orders
+      </button>
+      <button
+        class="nav-link"
+        [ngClass]="activeTab === 'Products' ? 'active' : ''"
+        id="nav-products-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-products"
+        type="button"
+        role="tab"
+        aria-controls="nav-products"
+        aria-selected="false"
+        (click)="changeTab('Products')"
+      >
+        Products
+      </button>
+      <button
+        class="nav-link"
+        [ngClass]="activeTab === 'Categories' ? 'active' : ''"
+        id="nav-categories-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-categories"
+        type="button"
+        role="tab"
+        aria-controls="nav-categories"
+        aria-selected="false"
+        (click)="changeTab('Categories')"
+      >
+        Categories
+      </button>
+      <button
+        class="nav-link"
+        [ngClass]="activeTab === 'PromoCodes' ? 'active' : ''"
+        id="nav-promocodes-tab"
+        data-bs-toggle="tab"
+        data-bs-target="#nav-promocodes"
+        type="button"
+        role="tab"
+        aria-controls="nav-promocodes"
+        aria-selected="false"
+        (click)="changeTab('PromoCodes')"
+      >
+        Promo Codes
+      </button>
+    </div>
+  </nav>
+  <div class="tab-content" id="nav-tabContent">
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeTab === 'Orders' ? 'show active' : ''"
+      id="nav-orders"
+      role="tabpanel"
+      aria-labelledby="nav-orders-tab"
+    >
+      <app-admin-orders *ngIf="activeTab === 'Orders'"></app-admin-orders>
+    </div>
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeTab === 'Products' ? 'show active' : ''"
+      id="nav-products"
+      role="tabpanel"
+      aria-labelledby="nav-products-tab"
+    >
+      <app-admin-products *ngIf="activeTab === 'Products'"></app-admin-products>
+    </div>
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeTab === 'Categories' ? 'show active' : ''"
+      id="nav-categories"
+      role="tabpanel"
+      aria-labelledby="nav-categories-tab"
+    >
+      <app-admin-categories
+        *ngIf="activeTab === 'Categories'"
+      ></app-admin-categories>
+    </div>
+    <div
+      class="tab-pane fade"
+      [ngClass]="activeTab === 'PromoCodes' ? 'show active' : ''"
+      id="nav-promocodes"
+      role="tabpanel"
+      aria-labelledby="nav-promocodes-tab"
+    >
+      <app-admin-promo-codes
+        *ngIf="activeTab === 'PromoCodes'"
+      ></app-admin-promo-codes>
+    </div>
+  </div>
+</main>

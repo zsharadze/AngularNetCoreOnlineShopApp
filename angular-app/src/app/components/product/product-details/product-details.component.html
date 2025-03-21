@@ -1,0 +1,69 @@
+<app-header></app-header>
+<i
+  class="fa fa-arrow-circle-left ms-2 mt-1"
+  aria-hidden="true"
+  (click)="location.back()"
+  title="Go back"
+></i>
+<div class="container">
+  <main class="main-content mt-3">
+    <div class="product-image position-relative align-items-center justify-content-center">
+      <img id="image"
+        alt="Product image"
+      />
+      <button
+        class="btn btn-secondary position-absolute top-50 start-0 translate-middle-y image-previous-btn ms-3"
+        style="z-index: 1"
+        (click)="showPreviousImage()"
+      >
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </button>
+      <button
+        class="btn btn-secondary position-absolute top-50 end-0 translate-middle-y image-next-btn me-3"
+        style="z-index: 1"
+        (click)="showNextImage()"
+      >
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="product-details">
+      <h1 class="product-title fw-bold">{{ (product$ | async)?.name }}</h1>
+      <p class="product-price">${{ (product$ | async)?.price }}</p>
+      <p class="product-description">
+        {{ (product$ | async)?.description }}
+      </p>
+      <div class="product-attributes">
+        <h5>More:</h5>
+        <ul>
+          <li>
+            Category:
+            {{ (product$ | async)?.categoryName }}
+          </li>
+          <li>
+            Added date:
+            {{ (product$ | async)?.createdDate | date : "dd-MM-yyyy" }}
+          </li>
+          <li>Total sold: {{ (product$ | async)?.ordersCount }}</li>
+        </ul>
+      </div>
+      <div class="d-flex align-items-center mb-4">
+        <label for="quantity" class="me-2">Quantity:</label>
+        <input
+          type="number"
+          id="quantity"
+          class="form-control w-25 me-2"
+          min="1"
+          value="1"
+          [(ngModel)]="quantity"
+        />
+      </div>
+      <button
+        class="add-to-cart-button"
+        *ngIf="product$ | async as productResolved"
+        (click)="addProductToCart(productResolved)"
+      >
+        Add to Cart <i class="fa fa-cart-plus" aria-hidden="true"></i>
+      </button>
+    </div>
+  </main>
+</div>

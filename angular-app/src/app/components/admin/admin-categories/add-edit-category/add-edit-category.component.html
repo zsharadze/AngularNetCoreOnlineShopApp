@@ -1,0 +1,110 @@
+<app-header></app-header>
+<i
+  class="fa fa-arrow-circle-left ms-2 mt-2 float-start"
+  aria-hidden="true"
+  (click)="location.back()"
+  title="Go back"
+></i>
+<div class="container mt-2">
+  <h5 class="text-center mb-2 fw-bold">
+    {{ categoryForm.get("id")?.value ? "Edit" : "Add" }} Category
+  </h5>
+  <form
+    [formGroup]="categoryForm"
+    class="category-form"
+    (ngSubmit)="saveCategory()"
+  >
+    <div class="mb-3">
+      <label class="form-label">Category name</label>
+      <div class="form-group">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter category name"
+          required
+        />
+        <span
+          class="text-danger validation-span"
+          *ngIf="
+            categoryForm.get('name')?.errors &&
+            categoryForm.get('name')?.hasError('required')
+          "
+          title="Category name field required"
+          >*</span
+        >
+      </div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Select icon type</label>
+      <div class="form-check">
+        <input
+          id="faClassRadioBtn"
+          class="form-check-input"
+          value="true"
+          type="radio"
+          name="iconType"
+          formControlName="iconType"
+          [checked]="isFaClassSelected"
+          (change)="onIconTypeChange(true)"
+        />
+        <label class="form-check-label" for="faClassRadioBtn">
+          Font awesome class
+        </label>
+      </div>
+      <div class="form-check">
+        <input
+          id="imageRadioBtn"
+          class="form-check-input"
+          value="false"
+          type="radio"
+          name="iconType"
+          formControlName="iconType"
+          [checked]="!isFaClassSelected"
+          (change)="onIconTypeChange(false)"
+        />
+        <label class="form-check-label" for="imageRadioBtn"> Image </label>
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="isFaClassSelected">
+      <label class="form-label">Font awesome class</label>
+      <div class="form-group">
+        <input
+          id="faClassInput"
+          type="text"
+          class="form-control"
+          formControlName="faClass"
+          placeholder="example:	fa fa-desktop"
+          required
+        />
+        <i
+          id="fa-class-icon-preview"
+          class="{{ categoryForm.get('faClass')?.value }} ms-2"
+        ></i>
+      </div>
+    </div>
+    <div class="mb-3" *ngIf="!isFaClassSelected">
+      <label class="form-label">Image</label>
+      <div class="form-group">
+        <input
+          #imageInput
+          type="file"
+          class="form-control shadow-none"
+          id="image"
+          name="image"
+          formControlName="image"
+          accept="image/*"
+          (change)="onInputImageFileChange($event)"
+        />
+        <img
+          *ngIf="imageFile.srcUrl"
+          ngClass="mt-2"
+          [src]="imageFile.srcUrl"
+          class="category-image"
+          alt="Category image"
+        />
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Save Changes</button>
+  </form>
+</div>

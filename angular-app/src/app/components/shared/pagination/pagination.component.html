@@ -1,0 +1,58 @@
+<nav aria-label="..." *ngIf="pager">
+  <ul class="pagination">
+    @if (pager.currentPage > 6) {
+
+    <li class="page-item" [ngClass]="pager.hasPrevious ? '' : 'disabled'">
+      <button
+        class="page-link"        
+        tabindex="-1"
+        aria-disabled="true"
+        (click)="changePage(pager.currentPage - 1)"
+        >Previous</button
+      >
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="changePage(1)">1</button>
+    </li>
+    <li>
+      <a>...</a>
+    </li>
+    }
+    <li
+      [ngClass]="
+        startEndIndexesArray.length <= 1
+          ? page === pager.currentPage
+            ? 'active page-item d-none'
+            : 'page-item'
+          : page === pager.currentPage
+          ? 'active page-item'
+          : 'page-item'
+      "
+      *ngFor="let page of startEndIndexesArray"
+    >
+      <button class="page-link" (click)="changePage(page)">
+        {{ page }}
+      </button>
+    </li>
+    @if (pager.currentPage + 4 < pager.totalPages) {
+    <li>
+      <a>...</a>
+    </li>
+    <li class="page-item">
+      <button class="page-link" (click)="changePage(pager.totalPages)">{{
+        pager.totalPages
+      }}</button>
+    </li>
+
+    <li class="page-item">
+      <button
+        class="page-link"
+        [ngClass]="pager.hasNext ? '' : 'disabled'"
+        (click)="changePage(pager.currentPage + 1)"
+      >
+        Next
+      </button>
+    </li>
+    }
+  </ul>
+</nav>

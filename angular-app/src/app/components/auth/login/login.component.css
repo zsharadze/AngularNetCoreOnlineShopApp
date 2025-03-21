@@ -1,0 +1,14 @@
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+.vertical-center {
+  min-height: 100%;
+  height: calc(100vh - 50px); /* Adjust based on header height */
+  display: flex;
+  align-items: center;
+  max-width: 322px;
+}
+
+.fa-lock {
+  color: rgb(66, 165, 245);
+}
