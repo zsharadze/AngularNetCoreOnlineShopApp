@@ -4,17 +4,14 @@
     <li
       *ngFor="let category of (categoriesState$ | async)?.categoryList"
       (click)="categoryClick(category.id)"
-      role="button"
+      role="button" class="grow-category-img-and-text"
     >
-      @if(category.faClass){
-      <i class="{{ category.faClass }} menuIcon"></i>
-      } @else if (category.imageName){
       <img
         src="{{ urlCategoryImages + category.imageName }}"
         class="menuImage"
         alt="category image"
       />
-      }
+
       <span class="ms-3">{{ category.name }}</span>
     </li>
   </ul>

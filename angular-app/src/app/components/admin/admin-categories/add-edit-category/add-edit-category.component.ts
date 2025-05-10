@@ -28,7 +28,6 @@ export class AddEditCategoryComponent {
   urlCategoryImages = environment.CATEGORY_IMAGES_URL;
   categoryForm: FormGroup;
   editCategoryId = 0;
-  isFaClassSelected = true;
   imageFile: {
     srcUrl: string;
     file: File | null;
@@ -47,8 +46,6 @@ export class AddEditCategoryComponent {
     this.categoryForm = this.formBuilder.group({
       id: [],
       name: ['', Validators.required],
-      faClass: [''],
-      iconType: ['true'],
       imageName: [''],
       image: [''],
     });
@@ -70,36 +67,8 @@ export class AddEditCategoryComponent {
   setInputsOnEdit(category: Category) {
     this.categoryForm.get('id')?.setValue(this.editCategoryId);
     this.categoryForm.get('name')?.setValue(category.name);
-    if (category.imageName)
-      this.categoryForm.get('imageName')?.setValue(category.imageName);
-    if (category.faClass) {
-      this.isFaClassSelected = true;
-      this.categoryForm.get('faClass')?.setValue(category.faClass);
-    } else {
-      this.isFaClassSelected = false;
-      this.imageFile.srcUrl = this.urlCategoryImages + category.imageName;
-    }
-    //set validators
-    this.onIconTypeChange(this.isFaClassSelected);
-  }
-
-  onIconTypeChange(isFaClass: boolean) {
-    this.isFaClassSelected = isFaClass;
-    if (isFaClass) {
-      this.categoryForm.get('faClass')!.setValidators(Validators.required);
-      this.categoryForm.get('image')!.clearValidators();
-    } else {
-      if (!this.imageFile.srcUrl)
-        this.categoryForm.get('image')!.setValidators(Validators.required);
-      this.categoryForm.get('faClass')!.clearValidators();
-    }
-    if (!this.isFaClassSelected) this.categoryForm.get('faClass')?.setValue('');
-    else {
-      this.imageFile.srcUrl = '';
-      this.categoryForm.get('image')?.setValue('');
-      if (this.imageFileInput && this.imageFileInput.nativeElement)
-        this.imageFileInput.nativeElement.value = '';
-    }
+    this.categoryForm.get('imageName')?.setValue(category.imageName);
+    this.imageFile.srcUrl = this.urlCategoryImages + category.imageName;
   }
 
   onInputImageFileChange(event: any) {
@@ -124,18 +93,11 @@ export class AddEditCategoryComponent {
     let categoryFormData = new FormData();
     categoryFormData.append('id', this.editCategoryId.toString());
     categoryFormData.append('name', this.categoryForm.get('name')?.value);
-    if (this.categoryForm.get('imageName')?.value) {
-      categoryFormData.append(
-        'imageName',
-        this.categoryForm.get('imageName')?.value
-      );
-    }
-    if (this.isFaClassSelected) {
-      categoryFormData.append(
-        'faClass',
-        this.categoryForm.get('faClass')?.value
-      );
-    } else if (this.imageFile.file)
+    categoryFormData.append(
+      'imageName',
+      this.categoryForm.get('imageName')?.value
+    );
+    if (this.imageFile.file)
       categoryFormData.append('Image', this.imageFile.file);
 
     if (!this.editCategoryId) {

@@ -20,8 +20,6 @@ namespace ASPNetCoreWebApi.Domain.Services
 
         public Task<int> Add(CategoryDTO newItem)
         {
-            if (!string.IsNullOrEmpty(newItem.FaClass))
-                newItem.FaClass = newItem.FaClass.Trim();
             return _repository.Add(_mapper.Map<Category>(newItem));
         }
 
@@ -37,8 +35,6 @@ namespace ASPNetCoreWebApi.Domain.Services
 
         public async Task<CategoryDTO> Update(CategoryDTO item)
         {
-            if (!string.IsNullOrEmpty(item.FaClass))
-                item.FaClass = item.FaClass.Trim();
             return _mapper.Map<CategoryDTO>(await _repository.Update(_mapper.Map<Category>(item)));
         }
 

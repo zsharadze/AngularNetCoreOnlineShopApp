@@ -36,54 +36,6 @@
       </div>
     </div>
     <div class="mb-3">
-      <label class="form-label">Select icon type</label>
-      <div class="form-check">
-        <input
-          id="faClassRadioBtn"
-          class="form-check-input"
-          value="true"
-          type="radio"
-          name="iconType"
-          formControlName="iconType"
-          [checked]="isFaClassSelected"
-          (change)="onIconTypeChange(true)"
-        />
-        <label class="form-check-label" for="faClassRadioBtn">
-          Font awesome class
-        </label>
-      </div>
-      <div class="form-check">
-        <input
-          id="imageRadioBtn"
-          class="form-check-input"
-          value="false"
-          type="radio"
-          name="iconType"
-          formControlName="iconType"
-          [checked]="!isFaClassSelected"
-          (change)="onIconTypeChange(false)"
-        />
-        <label class="form-check-label" for="imageRadioBtn"> Image </label>
-      </div>
-    </div>
-    <div class="mb-3" *ngIf="isFaClassSelected">
-      <label class="form-label">Font awesome class</label>
-      <div class="form-group">
-        <input
-          id="faClassInput"
-          type="text"
-          class="form-control"
-          formControlName="faClass"
-          placeholder="example:	fa fa-desktop"
-          required
-        />
-        <i
-          id="fa-class-icon-preview"
-          class="{{ categoryForm.get('faClass')?.value }} ms-2"
-        ></i>
-      </div>
-    </div>
-    <div class="mb-3" *ngIf="!isFaClassSelected">
       <label class="form-label">Image</label>
       <div class="form-group">
         <input
@@ -95,6 +47,7 @@
           formControlName="image"
           accept="image/*"
           (change)="onInputImageFileChange($event)"
+          [required]="!editCategoryId ? true : false"
         />
         <img
           *ngIf="imageFile.srcUrl"

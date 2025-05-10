@@ -33,11 +33,3 @@ input[type="radio"] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   padding: 15px 40px 15px 40px;
 }
-
-#faClassInput {
-  width: 240px;
-}
-
-#fa-class-icon-preview {
-  font-size: 21px;
-}

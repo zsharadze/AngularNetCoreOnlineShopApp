@@ -70,19 +70,10 @@ namespace ASPNetCoreWebApi.Controllers
             {
                 _categoryImageSetter.SetImageOnCategoryAddEdit(category);
                 await _categoryImageSaver.SaveImagesOnAddEditCategoryAsync(category);
-            }
-            //check if category has image and if uploaded new image and deleting old image
-            if (category.Image != null && !string.IsNullOrWhiteSpace(imageNameToDelete) && string.IsNullOrWhiteSpace(category.FaClass))
-            {
-                //delete deleted images from wwwroot\images\products folder
+                //delete deleted images from wwwroot\images\categories folder
                 _categoryImageDeleter.DeleteImage(imageNameToDelete);
             }
-            else if (!string.IsNullOrWhiteSpace(category.FaClass) && !string.IsNullOrWhiteSpace(imageNameToDelete))
-            {
-                //check if if faClass has value and delete unused image. (happens when editing category with image and choosing and filling faClass field istead of image
-                _categoryImageDeleter.DeleteImage(imageNameToDelete);
-                category.ImageName = null;
-            }
+
             await _categoryService.Update(category);
 
             return NoContent();
