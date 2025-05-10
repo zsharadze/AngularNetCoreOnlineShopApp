@@ -12,7 +12,7 @@ Angular 18, NgRx for state management, Bootstrap 5, authentication (token), auth
 6. Open terminal and run npm install command to install node modules.
 7. Run Angular 18 project with npm start and you are done.
 
-![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture11.PNG?raw=true)
+![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture1.PNG?raw=true)
 
 ![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture2.PNG?raw=true)
 
@@ -28,9 +28,9 @@ Angular 18, NgRx for state management, Bootstrap 5, authentication (token), auth
 
 ![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture8.PNG?raw=true)
 
-![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture99.PNG?raw=true)
+![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture9.PNG?raw=true)
 
-![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture1010.PNG?raw=true)
+![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture10.PNG?raw=true)
 
 ![screenshot](https://github.com/zsharadze/AngularNetCoreOnlineShopApp/blob/master/Capture11.PNG?raw=true)
 
